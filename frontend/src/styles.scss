@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat';
+}
+
+body {
+    margin: 0;
+}
+
+/* CSS Variables */
+:root {
+    --black: #050505;
+    --white: #F6F6F6;
+}

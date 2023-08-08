@@ -1,0 +1,10 @@
+{
+    "hi": "Bonjour",
+    "home": {
+        "landing-title": {
+            "portfolio-caps": "PORTFOLIO",
+            "director-caps": "RÉALISATEUR",
+            "editor-caps": "MONTEUR"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "TODO",
+    "password": "TODO",
+    "database": "TODO",
+    "host": "TODO",
+    "dialect": "mysql",
+    "port": 3306
+  },
+  "test": {
+    "username": "TODO",
+    "password": "TODO",
+    "database": "TODO",
+    "host": "TODO",
+    "dialect": "mysql",
+    "port": 3306
+  },
+  "production": {
+    "username": "TODO",
+    "password": "TODO",
+    "database": "TODO",
+    "host": "TODO",
+    "dialect": "mysql",
+    "port": 3306
+  }
+}
