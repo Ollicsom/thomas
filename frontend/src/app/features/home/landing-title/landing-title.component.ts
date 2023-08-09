@@ -66,6 +66,10 @@ class Star {
     height: number;
     velocity = 0.3;
     sizeModifier = 2;
+    opacity = 1;
+    delay: number;
+    minDelay = 8000;
+    maxDelay = 40000
 
     constructor(context, windowWidth, windowHeight, layer) {
         this.context = context;
@@ -74,11 +78,29 @@ class Star {
         this.layer = layer;
         this.x = (Math.random() * windowWidth * 2) - windowWidth;
         this.y = (Math.random() * windowHeight * 2) - windowHeight;
+        this.delay = this.minDelay + (Math.random() * (this.maxDelay - this.minDelay));
+        setTimeout(() => this.fadeOut(), this.delay);
+    }
+
+    fadeOut() {
+        while (this.opacity > 0) {
+            this.opacity -= 0.0005;
+        }
+        setTimeout(() => this.fadeIn(), this.delay);
+    }
+
+    fadeIn() {
+        while (this.opacity < 1) {
+            this.opacity += 0.0005;
+        }
+        setTimeout(() => this.fadeOut(), this.delay);
     }
 
     mouseMove(cursorX, cursorY) {
         this.context.beginPath();
-        this.context.fillStyle = '#666666';
+        this.context.fillStyle = `rgba(102, 102, 102 ,0.4)`;
+        this.context.shadowColor = "white";
+        this.context.shadowBlur = 15 * this.layer;
         this.context.arc(
             this.x - ((cursorX - this.width) * this.velocity / this.layer),
             this.y - ((cursorY - this.height) * this.velocity / this.layer),
