@@ -21,7 +21,7 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.context = this.starsCanvas.nativeElement.getContext('2d');
-        this.generateParticles(50, 3);
+        this.generateParticles([100, 70, 50, 15]);
         this.anim();
     }
 
@@ -34,15 +34,15 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
     onMouseMove(e) {
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
+        this.starsArray.forEach((star) => star.mouseMove(this.mouseX, this.mouseY));
     }
 
-    generateParticles(amount, layer) {
-        for (let layerIndex = 0; layerIndex < layer; layerIndex++) {
-            for (let i = 0; i < amount; i++) {
-                this.starsArray.push(new Star(this.context, this.windowWidth, this.windowHeight, layerIndex));
+    generateParticles(layerTab) {
+        layerTab.forEach((layer, layerIndex) => {
+            for (let i = 0; i < layer; i++) {
+                this.starsArray.push(new Star(this.context, this.windowWidth, this.windowHeight, layerIndex + 1));
             }
-        }
-        console.log(this.starsArray);
+        });
     }
 
     anim() {
@@ -50,7 +50,7 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
 
         this.context.fillStyle = '#050505';
         this.context.fillRect(0, 0, this.windowWidth, this.windowHeight);
-        this.starsArray.forEach((star) => star.mouseMove(this.mouseX, this.mouseY));
+        this.starsArray.forEach((star) => star.anim());
     }
 
 }
@@ -62,50 +62,79 @@ class Star {
     layer: number;
     x: number;
     y: number;
+    startX: number;
+    startY: number;
     width: number;
     height: number;
-    velocity = 0.3;
-    sizeModifier = 2;
+    velocity = 0.4;
     opacity = 1;
     delay: number;
-    minDelay = 8000;
-    maxDelay = 40000
+    duration: number;
+    minDelay = 5000;
+    maxDelay = 20000;
+    minDuration = 800;
+    maxDuration = 10000;
+    fading = 'waiting';
+    sizeModifier = 5;
+    sizeModiferMax = 5;
+    step = 30;
+    xDestination: number;
+    yDestination: number;
 
     constructor(context, windowWidth, windowHeight, layer) {
         this.context = context;
         this.width = windowWidth;
         this.height = windowHeight;
         this.layer = layer;
-        this.x = (Math.random() * windowWidth * 2) - windowWidth;
-        this.y = (Math.random() * windowHeight * 2) - windowHeight;
+        this.startX = (Math.random() * windowWidth * 2) - windowWidth;
+        this.startY = (Math.random() * windowHeight * 2) - windowHeight;
+        this.x = this.startX;
+        this.y = this.startY;
+        this.xDestination = this.x;
+        this.yDestination = this.y;
         this.delay = this.minDelay + (Math.random() * (this.maxDelay - this.minDelay));
+        this.duration = this.minDuration + (Math.random() * (this.maxDuration - this.minDuration));
+        setTimeout(() => this.fadeOut(), this.delay);
+    }
+
+    fadeIn() {
+        this.fading = 'fadein';
         setTimeout(() => this.fadeOut(), this.delay);
     }
 
     fadeOut() {
-        while (this.opacity > 0) {
-            this.opacity -= 0.0005;
-        }
-        setTimeout(() => this.fadeIn(), this.delay);
-    }
-
-    fadeIn() {
-        while (this.opacity < 1) {
-            this.opacity += 0.0005;
-        }
-        setTimeout(() => this.fadeOut(), this.delay);
+        this.fading = 'fadeout';
+        setTimeout(() => this.fadeIn(), this.duration);
     }
 
     mouseMove(cursorX, cursorY) {
+        this.xDestination = this.startX - ((cursorX - this.width) * this.velocity * this.layer);
+        this.yDestination = this.startY - ((cursorY - this.height) * this.velocity * this.layer);
+    }
+
+    anim() {
+        if (this.fading === 'fadein' && this.sizeModifier < this.sizeModiferMax) {
+            this.sizeModifier += 0.06;
+        }
+        if (this.fading === 'fadeout' && this.sizeModifier > 0) {
+            this.sizeModifier -= 0.06;
+            if (this.sizeModifier < 0) {
+                this.sizeModifier = 0;
+            }
+        }
         this.context.beginPath();
-        this.context.fillStyle = `rgba(102, 102, 102 ,0.4)`;
-        this.context.shadowColor = "white";
-        this.context.shadowBlur = 15 * this.layer;
-        this.context.arc(
-            this.x - ((cursorX - this.width) * this.velocity / this.layer),
-            this.y - ((cursorY - this.height) * this.velocity / this.layer),
-            this.layer * this.sizeModifier,
-            0, 2 * Math.PI);
+        this.context.fillStyle = `rgba(102, 102, 102 ,1)`;
+        this.context.shadowColor = 'white';
+        this.context.shadowBlur = 15;
+        const dX = this.xDestination - this.x;
+        const dY = this.yDestination - this.y;
+        this.x += (dX / this.step);
+        this.y += (dY / this.step);
+        this.context.moveTo(this.x - (this.layer * this.sizeModifier), this.y);
+        this.context.bezierCurveTo(this.x, this.y, this.x, this.y, this.x, this.y - (this.layer * this.sizeModifier));
+        this.context.bezierCurveTo(this.x, this.y, this.x, this.y, this.x + (this.layer * this.sizeModifier), this.y);
+        this.context.bezierCurveTo(this.x, this.y, this.x, this.y, this.x, this.y + (this.layer * this.sizeModifier));
+        this.context.bezierCurveTo(this.x, this.y, this.x, this.y, this.x - (this.layer * this.sizeModifier), this.y);
         this.context.fill();
     }
 }

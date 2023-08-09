@@ -9,6 +9,10 @@
     src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
 }
 
+html {
+    overflow-x: hidden;
+}
+
 h1, h2, h3 {
     font-family: 'Montserrat';
 }

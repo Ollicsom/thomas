@@ -1,11 +1,12 @@
 .landing-container {
     color: var(--white);
-    width: 100%;
+    width: 100vw;
     height: 300vh;
     text-align: center;
     display: grid;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     grid-template-rows: 90vh 90vh 1fr;
 }
 
@@ -20,8 +21,7 @@
 
 h1, h2 {
     font-weight: 800;
-    font-size: 4rem;
-    background-color: #050505;
+    font-size: 5rem;
     border-radius: 10px;
 }
 
@@ -31,4 +31,53 @@ canvas {
     position: fixed;
     height: 100%;
     top: 0;
+}
+
+svg {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 6vh;
+    width: auto;
+    grid-area: d;
+    justify-self: center;
+    align-self: center;
+    &>#scroll-text{
+        fill:none;
+        stroke: #faf5f5;
+        stroke-miterlimit:10;
+        stroke-width: 126px;
+        stroke-dasharray: 250;
+        stroke-dashoffset: 150;
+        animation: shine 3s linear infinite;
+    }
+    &>.scroll-low-opacity{
+        fill: white;
+        opacity: 0.6;
+    }
+    &>#arrow-down-indicator{
+        fill: white;
+        animation: bounce 1.5s linear infinite alternate;
+    }
+}
+
+@keyframes shine {
+    0% {
+        stroke-dashoffset: 250;
+    }
+    100% {
+        stroke-dashoffset: -250;
+    }
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 1;
+        transform: translateY(-60px);
+    }
+    100% {
+        opacity: 0.5;
+        transform: translateY(-75px);
+    }
 }
