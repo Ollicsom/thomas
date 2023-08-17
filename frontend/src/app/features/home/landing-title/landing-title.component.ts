@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-landing-title',
@@ -15,8 +15,10 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
     context: CanvasRenderingContext2D;
 
     @ViewChild('stars') starsCanvas: ElementRef<HTMLCanvasElement>;
+    @ViewChild('scroll') scrollIndicator: ElementRef;
 
     constructor(
+        private renderer: Renderer2
     ) { }
 
     ngAfterViewInit(): void {
@@ -35,6 +37,15 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
         this.starsArray.forEach((star) => star.mouseMove(this.mouseX, this.mouseY));
+    }
+
+    @HostListener('window:scroll', ['$event'])
+    onScroll() {
+        const y = parseInt(getComputedStyle(this.scrollIndicator.nativeElement).getPropertyValue('bottom').replace('px', ''), 10);
+        this.renderer.setStyle(
+            this.scrollIndicator.nativeElement, 'bottom', `${window.scrollY > 320 ? 20 : y + ((window.scrollY - y) / 15)}px`);
+        this.renderer.setStyle(
+            this.scrollIndicator.nativeElement, 'opacity', `${window.scrollY > 320 ? 0 : 0 + ((320 - (window.scrollY)) / 320)}`);
     }
 
     generateParticles(layerTab) {

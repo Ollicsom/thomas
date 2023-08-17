@@ -11,6 +11,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ToasterModule } from './shared/components/toaster/toaster.module';
 import { LandingTitleComponent } from './features/home/landing-title/landing-title.component';
 import { HomeComponent } from './features/home/home.component';
+import { VideoGalleryComponent } from './features/home/video-gallery/video-gallery.component';
 
 const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 
@@ -22,7 +23,8 @@ const modules = [
     declarations: [
         AppComponent,
         LandingTitleComponent,
-        HomeComponent
+        HomeComponent,
+        VideoGalleryComponent
     ],
     imports: [
         modules,
