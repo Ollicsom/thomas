@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-video-gallery',
@@ -11,6 +11,12 @@ export class VideoGalleryComponent implements AfterViewInit {
     @ViewChild('stickyContainer') stickyContainer: ElementRef;
     @ViewChild('galleryContainer') galleryContainer: ElementRef;
 
+    videoList = [
+        { title: 'Test', fileName: 'filename la team' },
+        { title: 'Caca', fileName: 'filename la team' },
+        { title: 'Nom un peu longuet', fileName: 'filename la team' }
+    ];
+
     scrollValue: number;
 
     constructor(
@@ -20,7 +26,7 @@ export class VideoGalleryComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.renderer.setStyle(
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-            this.container.nativeElement, 'height', `${this.galleryContainer.nativeElement.offsetWidth + (window.innerWidth / 2)}px`);
+            this.container.nativeElement, 'height', `${this.galleryContainer.nativeElement.offsetWidth}px`);
     }
 
     @HostListener('window:scroll', ['$event'])

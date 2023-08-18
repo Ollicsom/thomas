@@ -1,7 +1,14 @@
 <div #container class="container">
     <div #stickyContainer class="sticky-container">
         <div #galleryContainer class="gallery-container">
-            <p>SAlut les guys ca va ? </p>
+            <div>
+                <p>INTRO</p>
+            </div>
+            <div class="video-container" *ngFor="let video of videoList; let i = index">
+                <span></span>
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg">
+                <p>{{i}}</p>
+            </div>
         </div>
     </div>
 </div>

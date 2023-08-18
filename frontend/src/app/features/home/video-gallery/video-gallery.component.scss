@@ -1,10 +1,10 @@
 .container {
     width: 100%;
-    background-color: white;
+    // background-color: white;
 }
 .sticky-container {
     width: 100%;
-    background-color: red;
+    background-color: var(--white);
     height: 100vh;
     position: sticky;
     top: 0;
@@ -17,7 +17,14 @@
 }
 .gallery-container {
     min-width: 100vw;
-    background-color: purple;
+    background-color: var(--white);
     height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+}
+.video-container {
+    padding: 0 10%;
+    width: 50vw;
 }
 p{margin: 0}
