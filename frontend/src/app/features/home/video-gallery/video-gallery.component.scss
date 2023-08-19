@@ -27,4 +27,17 @@
     padding: 0 10%;
     width: 50vw;
 }
+
+.thumbnail{
+    cursor: pointer;
+    height: 70vh;
+    width: 50vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200%;
+    transition-duration: 0.5s;
+}
+.thumbnail:hover {
+    background-size: 210%;
+}
 p{margin: 0}

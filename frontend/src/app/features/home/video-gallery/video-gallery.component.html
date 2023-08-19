@@ -2,11 +2,13 @@
     <div #stickyContainer class="sticky-container">
         <div #galleryContainer class="gallery-container">
             <div>
-                <p>INTRO</p>
+                <p>{{ "home.video-gallery.project-lists" | translate }}</p>
             </div>
             <div class="video-container" *ngFor="let video of videoList; let i = index">
                 <span></span>
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg">
+                <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + video.fileName + ')'}">
+
+                </div>
                 <p>{{i}}</p>
             </div>
         </div>

@@ -12,9 +12,9 @@ export class VideoGalleryComponent implements AfterViewInit {
     @ViewChild('galleryContainer') galleryContainer: ElementRef;
 
     videoList = [
-        { title: 'Test', fileName: 'filename la team' },
-        { title: 'Caca', fileName: 'filename la team' },
-        { title: 'Nom un peu longuet', fileName: 'filename la team' }
+        { title: 'Test', fileName: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg' },
+        { title: 'Caca', fileName: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg' },
+        { title: 'Nom un peu longuet', fileName: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg' }
     ];
 
     scrollValue: number;
