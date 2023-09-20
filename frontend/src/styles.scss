@@ -8,14 +8,27 @@
     font-family: "Montserrat";
     src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
 }
+@font-face {
+    font-family: "Mont";
+    src: url("./assets/fonts/Mont-HeavyDEMO.otf");
+}
+@font-face {
+    font-family: "Boldfont";
+    src: url("./assets/fonts/THEBOLDFONT\ 2022.otf");
+}
+@font-face {
+    font-family: "Couture";
+    src: url("./assets/fonts/couture-bld.otf");
+}
+
 
 html {
     // overflow-x: hidden;
     width: 100%;
 }
 
-h1, h2, h3 {
-    font-family: 'Montserrat';
+h1, h2, h3, * {
+    font-family: 'Boldfont';
 }
 
 body {

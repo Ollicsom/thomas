@@ -12,11 +12,15 @@ import { ToasterModule } from './shared/components/toaster/toaster.module';
 import { LandingTitleComponent } from './features/home/landing-title/landing-title.component';
 import { HomeComponent } from './features/home/home.component';
 import { VideoGalleryComponent } from './features/home/video-gallery/video-gallery.component';
+import { VideoDetailsComponent } from './features/video-details/video-details/video-details.component';
+import { VideoService } from './shared/services/video.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 
 const modules = [
-    ToasterModule
+    ToasterModule,
+    AngularFontAwesomeModule
 ];
 
 @NgModule({
@@ -24,7 +28,8 @@ const modules = [
         AppComponent,
         LandingTitleComponent,
         HomeComponent,
-        VideoGalleryComponent
+        VideoGalleryComponent,
+        VideoDetailsComponent
     ],
     imports: [
         modules,
@@ -41,7 +46,7 @@ const modules = [
             }
         })
     ],
-    providers: [HttpClient, ToastService, {provide: LocationStrategy, useClass: HashLocationStrategy} ],
+    providers: [HttpClient, ToastService, {provide: LocationStrategy, useClass: HashLocationStrategy}, VideoService ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

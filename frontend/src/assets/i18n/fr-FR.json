@@ -6,7 +6,8 @@
             "editor-caps": "MONTEUR"
         },
         "video-gallery" : {
-            "project-lists": "LISTE DE PROJECTS"
+            "project-lists": "LISTE DE PROJECTS",
+            "see-more": "Voir plus de réalisations"
         }
     }
 }

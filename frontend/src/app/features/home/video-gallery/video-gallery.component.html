@@ -1,15 +1,23 @@
 <div #container class="container">
     <div #stickyContainer class="sticky-container">
         <div #galleryContainer class="gallery-container">
-            <div>
+            <div class="gallery-title">
                 <p>{{ "home.video-gallery.project-lists" | translate }}</p>
             </div>
-            <div class="video-container" *ngFor="let video of videoList; let i = index">
-                <span></span>
-                <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + video.fileName + ')'}">
-
+            <ng-container *ngFor="let video of videosList; let i = index">
+            <div *ngIf="i < 4 || isOpened" #videoContainer class="video-container">
+                    <div class="separator"></div>
+                    <div>
+                        <div [routerLink]="['/video', video.id]" class="thumbnail" [ngStyle]="{'background-image': 'url(' + video.thumbnailUrl + ')'}">
+                        </div>
+                        <p class="video-title">{{video.title}}</p>
+                        <p class="video-index">{{i + 1}}</p>
+                    </div>
                 </div>
-                <p>{{i}}</p>
+            </ng-container>
+            <div class="see-more" *ngIf="!isOpened">
+                <div class="separator"></div>
+                <p (click)="seeMore()">{{ "home.video-gallery.see-more" | translate }}</p>
             </div>
         </div>
     </div>

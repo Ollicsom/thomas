@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 
 @Component({
     selector: 'app-landing-title',
@@ -16,6 +16,7 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
 
     @ViewChild('stars') starsCanvas: ElementRef<HTMLCanvasElement>;
     @ViewChild('scroll') scrollIndicator: ElementRef;
+    @ViewChildren('svg') svg: QueryList<ElementRef>;
 
     constructor(
         private renderer: Renderer2
@@ -46,6 +47,15 @@ export class LandingTitleComponent implements OnInit, AfterViewInit {
             this.scrollIndicator.nativeElement, 'bottom', `${window.scrollY > 320 ? 20 : y + ((window.scrollY - y) / 15)}px`);
         this.renderer.setStyle(
             this.scrollIndicator.nativeElement, 'opacity', `${window.scrollY > 320 ? 0 : 0 + ((320 - (window.scrollY)) / 320)}`);
+
+        if (window.scrollY > this.windowHeight * 2 && window.scrollY < this.windowHeight * 3 ) {
+            this.svg.toArray().forEach((svg) => {
+                this.renderer.setStyle(
+                    svg.nativeElement, 'background-position', `center bottom ${
+                        (Math.round((window.scrollY - (2 * this.windowHeight)) / this.windowHeight * 500))
+                    }%`);
+            });
+        }
     }
 
     generateParticles(layerTab) {

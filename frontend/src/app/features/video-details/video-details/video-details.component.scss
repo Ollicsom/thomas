@@ -1,0 +1,32 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    &>.carousel-container {
+        height: 100vh;
+        width: fit-content;
+        display: flex;
+        &>.video-container {
+            height: 100vh;
+            width: 100vw;
+        }
+    }
+}
+
+.carousel-controls {
+    cursor: pointer;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5%;
+    &:last-of-type {
+        left: inherit;
+        right: 5%;
+    }
+}
+
+.caca {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+}

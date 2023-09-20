@@ -1,0 +1,20 @@
+
+<div class="container">
+    <p class="caca" (click)="backToHome()">Retour</p>
+    <i 
+        [ngClass]="{'disable': carouselIndex === 0}"
+        class="carousel-controls fa-solid fa-chevron-right"
+        (click)="setIndex(carouselIndex - 1)">
+    </i>
+    <div class="carousel-container">
+        <div #carouselitems *ngFor="let video of videosList" class="video-container">
+            <p>{{video.title}}</p>
+        </div>
+    </div><i class="fa-solid fa-arrow-right"></i>
+    <span>></span>
+    <i
+        [ngClass]="{'disable': carouselIndex === (carouselLength - 1)}"
+        class="carousel-controls fas fa-chevron-right"
+         (click)="setIndex(carouselIndex + 1)">
+    </i>
+</div>
